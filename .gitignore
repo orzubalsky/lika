@@ -1,0 +1,23 @@
+*.pyc
+*~
+local_settings.py
+.DS_Store
+
+# ignore buildout's workspace stuff:
+.installed.cfg
+bin/
+develop-eggs/
+eggs/
+parts/
+
+# ignore static files (for now):
+ff/static/
+
+# ignore user uploaded files
+ff/media/uploads/
+
+# ignore analytics html template
+ff/apps/futures/templates/analytics.html
+
+# ignore sql data dump:
+sample_data.json
