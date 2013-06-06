@@ -87,6 +87,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
     # Uncomment the next line for simple clickjacking protection:
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'oscar.apps.basket.middleware.BasketMiddleware'
 )
 
 AUTHENTICATION_BACKENDS = (
@@ -183,6 +184,7 @@ HAYSTACK_CONNECTIONS = {
 
 from oscar.defaults import *
 
+OSCAR_ALLOW_ANON_CHECKOUT = True
 OSCAR_EAGER_ALERTS = False
 OSCAR_DEFAULT_CURRENCY = 'USD'
 OSCAR_INITIAL_ORDER_STATUS = 'Pending'
