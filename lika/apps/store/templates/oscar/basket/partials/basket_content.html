@@ -113,10 +113,11 @@
 
 
     {% block formactions %}
-        <div class="form-actions clearfix" >
-            <a href="{% url checkout:index %}" class="pull-right btn btn-large btn-primary btn-full">{% trans "Proceed to checkout" %}</a>
-        </div>
-    {% endblock formactions %}
+    <div class="form-actions">
+        <a href="{% url paypal-redirect %}"><img src="https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif" align="left" style="margin-right:7px;"></a>
+        <a href="{% url checkout:index %}" class="pull-right btn btn-large btn-primary">Proceed to checkout</a>
+    </div>
+    {% endblock %}
 
 {% else %}
     {% block emptybasket %}

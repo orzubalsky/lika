@@ -11,13 +11,9 @@ eggs/
 parts/
 
 # ignore static files (for now):
-ff/static/
-
-# ignore user uploaded files
-ff/media/uploads/
-
-# ignore analytics html template
-ff/apps/futures/templates/analytics.html
+lika/static/
+lika/media/cache/
 
 # ignore sql data dump:
 sample_data.json
+
