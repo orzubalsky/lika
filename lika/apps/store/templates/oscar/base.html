@@ -52,7 +52,9 @@
         {# Additional CSS - specific to certain pages #}
         {% block extrastyles %}{% endblock %}
 
-        {% block extrahead %}{% endblock %}
+        {% block extrahead %}
+        <link rel="stylesheet" type="text/css" href="{% static "css/site.css" %}" />
+		{% endblock %}
     </head>
 
     <body id="{% block body_id %}default{% endblock %}" class="{% block body_class %}default{% endblock %}">
