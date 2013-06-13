@@ -75,6 +75,7 @@ a {
 	position:absolute;
 	top:115px;
 	left:465px;
+	z-index:100;
 }
 
 .side_categories .nav-list > li > a {
@@ -115,4 +116,13 @@ h1, h2, h3, h4, h5, h6 {
 }
 .cart li strong {
 	font-weight: normal;
+}
+
+.price_color, .availability.instock {
+	color: blue;
+	font-weight: normal;
+}
+
+.star {
+	display:none;
 }
