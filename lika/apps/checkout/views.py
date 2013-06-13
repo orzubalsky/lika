@@ -3,7 +3,7 @@ from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from oscar.apps.checkout import views
 from oscar.apps.payment import forms, exceptions, models
-
+from shipping.repository import Repository
 from paypal.payflow import facade
 
 
@@ -63,7 +63,7 @@ class PaymentDetailsView(views.PaymentDetailsView):
             # Using authorization here (two-stage model).  You could use sale to
             # perform the auth and capture in one step.  The choice is dependent
             # on your business model.
-            facade.authorize(order_number,
+            facade.sale(order_number,
                              total_incl_tax,
                              kwargs['bankcard'],
                              kwargs['billing_address'])
@@ -78,3 +78,9 @@ class PaymentDetailsView(views.PaymentDetailsView):
                                amount_allocated=total_incl_tax)
         self.add_payment_source(source)
         self.add_payment_event('Authorised', total_incl_tax)
+
+
+class ShippingMethodView(views.ShippingMethodView):
+    def get_available_shipping_methods(self):
+        return Repository().get_shipping_methods(self.request.user, self.request.basket,
+                                                 self.get_shipping_address())

@@ -138,9 +138,9 @@ INSTALLED_APPS = [
     'paypal',
     'store',
     'checkout',
-    'shipping',
-] + get_core_apps()
+] + get_core_apps(['shipping',])
 
+print INSTALLED_APPS
 
 
 # A sample logging configuration. The only tangible logging
