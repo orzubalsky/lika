@@ -2,7 +2,9 @@ from django.conf.urls import patterns, include, url
 from django.contrib import admin
 from django.conf import settings
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
-from oscar.app import application
+from app import application
+from paypal.payflow.app import application as payflow
+from paypal.express.dashboard.app import application as express_dashboard
 
 admin.autodiscover()
 
@@ -10,8 +12,13 @@ admin.autodiscover()
 urlpatterns = patterns('',
 
     url(r'^admin/', include(admin.site.urls)),
-    (r'^checkout/paypal/', include('paypal.express.urls')),    
-    (r'', include(application.urls))
+    # PayPal Express integration...
+    (r'^checkout/paypal/', include('paypal.express.urls')),
+    # Dashboard views for Payflow Pro
+    (r'^dashboard/paypal/payflow/', include(payflow.urls)),
+    # Dashboard views for Express
+    (r'^dashboard/paypal/express/', include(express_dashboard.urls)),
+    (r'', include(application.urls)),
 )
 
 # static files url patterns

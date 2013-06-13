@@ -1,5 +1,6 @@
 # Django settings for ts project.
 import os, sys
+location = lambda x: os.path.join(os.path.dirname(os.path.realpath(__file__)), x)
 
 ADMINS = (
     # ('The Youngest', 'youngestforever@gmail.com'),
@@ -95,17 +96,18 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
 )
 
+INTERNAL_IPS = ('127.0.0.1',)
+
 ROOT_URLCONF = 'lika.urls'
 
 from oscar import OSCAR_MAIN_TEMPLATE_DIR
-
 TEMPLATE_DIRS = (
-    # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
-    # Always use forward slashes, even on Windows.
-    # Don't forget to use absolute paths, not relative paths.
-    PROJECT_DIR + '/apps/store/templates/oscar',
-    PROJECT_DIR + '/apps/store/templates',
-    PROJECT_DIR + '/templates',
+    os.path.join(PROJECT_DIR, 'templates'), 
+    os.path.join(PROJECT_DIR, 'apps', 'store'),
+    os.path.join(PROJECT_DIR, 'apps', 'store', 'templates'),
+    os.path.join(PROJECT_DIR, 'apps', 'store', 'templates', 'oscar'),             
+    os.path.join(OSCAR_MAIN_TEMPLATE_DIR, 'templates'),
+    OSCAR_MAIN_TEMPLATE_DIR,
 )
 
 TEMPLATE_DIRS = TEMPLATE_DIRS + (OSCAR_MAIN_TEMPLATE_DIR,)
@@ -133,7 +135,10 @@ INSTALLED_APPS = [
     'south',                        # intelligent schema and data migrations
     'compressor',
     'pytz',                         # python timezone library
-    'store',                     # 
+    'paypal',
+    'store',
+    'checkout',
+    'shipping',
 ] + get_core_apps()
 
 
