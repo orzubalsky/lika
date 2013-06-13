@@ -1,0 +1,118 @@
+@CHARSET "UTF-8";
+
+@font-face {
+    font-family: 'TradeGothicLTStdBold';
+    src: url('../fonts/tradegothicltstd-bold-webfont.eot');
+    src: url('../fonts/tradegothicltstd-bold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/tradegothicltstd-bold-webfont.woff') format('woff'),
+         url('../fonts/tradegothicltstd-bold-webfont.ttf') format('truetype'),
+         url('../fonts/tradegothicltstd-bold-webfont.svg#TradeGothicLTStdBold') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+	background: white;
+	color: black;
+	font-family: "Andale Mono", "Monotype.com", "Droid Sans", monospace, Helvetica, Arial, sans-serif;
+	font-size: .7em;
+}
+
+a {
+	color: blue;
+	text-decoration: none;
+}
+
+.container-fluid.page{
+	box-shadow:none;
+}
+
+.page_inner {
+	padding:0;
+}
+
+.header .span7 img {
+	height:93px;
+	width:292px;
+	background: url("../img/sans_sm.gif");
+}
+
+.header small {
+	display: none;
+}
+
+#language_selector {
+	display: none;
+}
+
+.navbar.primary {
+	display: none;	
+}
+
+.side_categories .nav .nav-header {
+	display: none;
+}
+
+.breadcrumb {
+	background-color:white;
+	padding:0;
+	font-family: TradeGothicLTStdBold, "Droid Sans", Helvetica, Arial;
+	text-transform: uppercase;
+	font-weight: normal;
+	color:black;
+	letter-spacing:.05em;
+}
+
+.side_categories {
+	border:none;
+	background-color:white;
+	box-shadow:none;
+	padding:0;
+
+}
+
+.sidebar {
+	position:absolute;
+	top:115px;
+	left:465px;
+}
+
+.side_categories .nav-list > li > a {
+	padding:0;
+	font-family: TradeGothicLTStdBold, "Droid Sans", Helvetica, Arial;
+	text-transform: uppercase;
+	font-weight: normal;
+	color:black;
+	letter-spacing:.05em;
+}
+
+
+h1, h2, h3, h4, h5, h6 {
+	font-family: TradeGothicLTStdBold, "Droid Sans", Helvetica, Arial;
+	text-transform: uppercase;
+	font-weight: normal;
+	letter-spacing:.05em;
+}
+
+.page-header h1 {
+	font-size:1em;
+}
+
+.page-header {
+	border-bottom:0;
+}
+
+.row-fluid .span9 {
+	width:100%;
+	margin:0;
+}
+
+.cart li {
+	font-family: TradeGothicLTStdBold, "Droid Sans", Helvetica, Arial;
+	text-transform: uppercase;
+	font-weight: normal;
+	letter-spacing:.05em;
+}
+.cart li strong {
+	font-weight: normal;
+}
