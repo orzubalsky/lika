@@ -13,6 +13,7 @@ parts/
 # ignore static files (for now):
 lika/static/
 lika/media/cache/
+lika/media/images/
 
 # ignore sql data dump:
 sample_data.json
