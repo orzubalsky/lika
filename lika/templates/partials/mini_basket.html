@@ -1,4 +1,4 @@
 {% load currency_filters %}
 {% load i18n %}
 
-<a href="{% url basket:summary %}">{% trans "SHOPPING BAG" %} ({{ request.basket.total_incl_tax|currency }})</a>
+<a id="cart_link" href="{% url basket:summary %}">{% trans "SHOPPING BAG" %} ({{ request.basket.total_incl_tax|currency }})</a>
