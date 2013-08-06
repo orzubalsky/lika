@@ -13,9 +13,19 @@ class PaymentDetailsView(views.PaymentDetailsView):
         # Override method so the bankcard and billing address forms can be added
         # to the context.
         ctx = super(PaymentDetailsView, self).get_context_data(**kwargs)
+
         ctx['bankcard_form'] = kwargs.get('bankcard_form', forms.BankcardForm())
-        ctx['billing_address_form'] = kwargs.get('billing_address_form',
-                                                 forms.BillingAddressForm())
+        
+        ctx['billing_address_form'] = kwargs.get('billing_address_form', forms.BillingAddressForm())
+
+        if self.get_default_billing_address() is not None and kwargs.get('billing_address_form') is None:
+            
+            # initialize billing address form with user's address
+            default_billing_address_form = forms.BillingAddressForm(initial=self.get_default_billing_address().__dict__)            
+            
+            # pass the updated form to the context
+            ctx['billing_address_form'] = default_billing_address_form
+
         return ctx
 
     def post(self, request, *args, **kwargs):
@@ -28,6 +38,7 @@ class PaymentDetailsView(views.PaymentDetailsView):
 
         bankcard_form = forms.BankcardForm(request.POST)
         billing_address_form = forms.BillingAddressForm(request.POST)
+
         if not all([bankcard_form.is_valid(), billing_address_form.is_valid()]):
             # Form validation failed, render page again with errors
             self.preview = False
@@ -50,6 +61,7 @@ class PaymentDetailsView(views.PaymentDetailsView):
             return HttpResponseRedirect(reverse('checkout:payment-details'))
         bankcard = bankcard_form.get_bankcard_obj()
 
+        print request
         # Attempt to submit the order, passing the bankcard object so that it
         # gets passed back to the 'handle_payment' method below.
         return self.submit(

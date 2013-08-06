@@ -137,9 +137,9 @@ INSTALLED_APPS = [
     'pytz',                         # python timezone library
     'paypal',
     'store',
+    'checkout'
 ] + get_core_apps(['shipping', 'checkout'])
 
-print INSTALLED_APPS
 
 
 # A sample logging configuration. The only tangible logging

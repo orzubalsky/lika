@@ -23,6 +23,7 @@ class Repository(CoreRepository):
         return self.prime_methods(basket, self.methods)
 
     def find_by_code(self, code, basket):
+        print code
         for method in self.methods:
             if code == method.code:
                 return self.prime_method(basket, method)
