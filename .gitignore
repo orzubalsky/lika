@@ -14,6 +14,7 @@ parts/
 lika/static/
 lika/media/cache/
 lika/media/images/
+lika/media/files
 
 # ignore sql data dump:
 sample_data.json

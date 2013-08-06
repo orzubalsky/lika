@@ -137,8 +137,9 @@ INSTALLED_APPS = [
     'pytz',                         # python timezone library
     'paypal',
     'store',
-    'checkout'
-] + get_core_apps(['shipping', 'checkout'])
+    'checkout',
+    'catalogue',
+] + get_core_apps(['shipping', 'checkout', 'catalogue'])
 
 
 
