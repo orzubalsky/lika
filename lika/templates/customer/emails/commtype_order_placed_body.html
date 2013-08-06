@@ -7,7 +7,12 @@ will be processed shortly.{% endblocktrans %}</p>
 
 <ul>
     {% for line in order.lines.all %}
-    <li>{{ line.title }} - {%  trans 'quantity:' %} {{ line.quantity }} - {% trans 'price:' %} {{ line.line_price_incl_tax|currency }}</li>
+    <li>
+    	{{ line.title }} - {%  trans 'quantity:' %} {{ line.quantity }} - {% trans 'price:' %} {{ line.line_price_incl_tax|currency }}
+ 		{% if line.product.product_class.name == 'Digital Product' %}
+ 			- {% trans 'download at:' %} {{ line.product.filename }}
+ 		{% endif %}    	
+    </li>
     {% endfor %}
 </ul>
 <p>
