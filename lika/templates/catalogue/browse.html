@@ -53,6 +53,7 @@
 {% endblock %}
 
 {% block content %}
+<div class="catalog">
     {% if category.description %}
         <div class="row-fluid">
             <div class="span9"><p>{{ category.description|safe }}</p></div>
@@ -76,4 +77,5 @@
     {% else %}
         <p class="nonefound">{% trans "No products found." %}</p>
     {% endif %}
+</div>
 {% endblock content %}
