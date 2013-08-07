@@ -1,6 +1,11 @@
 {% extends 'oscar/basket/partials/basket_content.html' %}
 {% load i18n %}
 
+{% block vouchers %}
+<div class="span6">
+</div>
+{% endblock vouchers %}
+
 {% block formactions %}
 <div class="form-actions">
 	{% if anon_checkout_allowed or request.user.is_authenticated %}
