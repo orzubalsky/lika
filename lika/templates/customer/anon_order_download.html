@@ -40,8 +40,12 @@
 
 {% else %}
 
-<p>please enter the email you used to make the purchase in order to get access to the files:</p>
+<form id="authenticateEmail" method="post" action="{% url customer:anon-order-download order_number=order.number line_id=line.pk %}">{% csrf_token %}
 
+    {{ form.as_p }}
+    <input type="submit" class="submit" value="Sumbit" />
+
+</form>
 {% endif %}
 
 

@@ -15,9 +15,6 @@ class CustomerApplication(app.CustomerApplication):
     order_history_view = views.OrderHistoryView
     order_detail_view = views.OrderDetailView
     anon_order_detail_view = views.AnonymousOrderDetailView
-    
-    anon_order_download_detail_view = views.AnonymousOrderDownloadDetailView
-    
     order_line_view = views.OrderLineView
     address_list_view = views.AddressListView
     address_create_view = views.AddressCreateView
@@ -63,7 +60,7 @@ class CustomerApplication(app.CustomerApplication):
 
             #url(r'^orders/download/(?P<order_number>[\w-]*)/(?P<line_id>\d+)/$',
             url(r'^orders/(?P<order_number>[\w-]*)/download/(?P<line_id>\d+)$',
-                self.anon_order_download_detail_view.as_view(), name='anon-order-download'),
+                'customer.views.anonymous_order_download_view', name='anon-order-download'),
 
             url(r'^orders/(?P<order_number>[\w-]*)/$',
                 login_required(self.order_detail_view.as_view()),

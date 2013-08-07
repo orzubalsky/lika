@@ -1,6 +1,7 @@
 import urlparse
+from django.shortcuts import render_to_response, get_object_or_404
+from django.template import RequestContext
 
-from django.shortcuts import get_object_or_404
 from django.views.generic import (TemplateView, ListView, DetailView,
                                   CreateView, UpdateView, DeleteView,
                                   FormView, RedirectView)
@@ -22,6 +23,7 @@ from oscar.apps.customer.utils import get_password_reset_url
 from oscar.core.loading import get_class, get_profile_class, get_classes
 
 from catalogue.models import Product
+from customer.forms import EmailForm
 
 Dispatcher = get_class('customer.utils', 'Dispatcher')
 EmailAuthenticationForm, EmailUserCreationForm, SearchByDateRangeForm = get_classes(
@@ -567,16 +569,19 @@ class AnonymousOrderDetailView(DetailView):
         return order
 
 
-class AnonymousOrderDownloadDetailView(DetailView):
-    model = Order
-    template_name = "customer/anon_order_download.html"
+def anonymous_order_download_view(request, order_number=None, line_id=None):
 
-    def get_object(self, queryset=None):
-        # Check URL hash matches that for order to prevent spoof attacks
-        order = get_object_or_404(self.model, user=None, number=self.kwargs['order_number'])
-        line = get_object_or_404(Line, pk=self.kwargs['line_id'])
+    order = get_object_or_404(Order, number=order_number)
+    line = get_object_or_404(Line, pk=line_id)
 
-        return order
+    form = EmailForm()
+
+    return render_to_response('customer/anon_order_download.html',{ 
+            'form' : form,
+            'line' : line,
+            'order': order, 
+        }, context_instance=RequestContext(request))
+
 
 
 class ChangePasswordView(FormView):
