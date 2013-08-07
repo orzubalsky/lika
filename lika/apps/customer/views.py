@@ -574,12 +574,33 @@ def anonymous_order_download_view(request, order_number=None, line_id=None):
     order = get_object_or_404(Order, number=order_number)
     line = get_object_or_404(Line, pk=line_id)
 
-    form = EmailForm()
+    emails_match = False
+    
+    if request.method == 'POST':
+        form = EmailForm(data=request.POST)    
+
+        if form.is_valid():
+            email = form.cleaned_data['email']
+
+            if order.user is None:
+                if order.guest_email == email:
+                    emails_match = True
+            else:
+                if order.user.email == email:
+                    emails_match = True
+
+    else:
+        form = EmailForm()
+
+
+    print order.guest_email
+    print order.user
 
     return render_to_response('customer/anon_order_download.html',{ 
-            'form' : form,
-            'line' : line,
-            'order': order, 
+            'emails_match' : emails_match,
+            'form'         : form,
+            'line'         : line,
+            'order'        : order, 
         }, context_instance=RequestContext(request))
 
 
