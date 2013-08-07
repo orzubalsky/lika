@@ -1,4 +1,4 @@
-{% extends "layout.html" %}
+{% extends "layout_2_col.html" %}
 {% load currency_filters %}
 {% load basket_tags %}
 {% load promotion_tags %}
@@ -15,57 +15,32 @@
 <div class="container-fluid page">
     <div class="page_inner">
         {% block breadcrumbs %}
-        <ul class="breadcrumb">
-            <li>
-                <a href="{% url promotions:home %}">{% trans "Home" %}</a>
-                <span class="divider">/</span>
-            </li>
-            {% if not category %}
-                <li class="active">{% trans "All products" %}</li>
-            {% else %}
-                {% for category in category.get_ancestors|slice:":-1" %}
-                <li>
-                    <a href="{{ category.get_absolute_url }}">{{ category.name }}</a>
-                    <span class="divider">/</span>
-                </li>
-                {% endfor %}
-                <li class="active">{{ category.name }}</li>
-            {% endif %}
-        </ul>
+        {{ block.super }}
         {% endblock breadcrumbs %}
+
         <div class="row-fluid">
-
             <aside class="sidebar span3">
-                {# Render promotions at the top of the left-hand sidebar #}
-                <div id="promotions_left">
-                    {% for promotion in promotions_left %}
-                        {% render_promotion promotion %}
-                    {% endfor %}
-                </div>
-                {% block column_left %}
-                    {% category_tree depth=2 as tree_categories %}
-                    {% if tree_categories %}
-                        <div class="side_categories" style="padding: 8px 0;">
-                            <ul class="nav nav-list">
-                                <li class="nav-header">{% trans "Browse categories" %}</li>
-                                {% for category in tree_categories %}
-                                    <li>
-                                        <a href="{{ category.0.get_absolute_url }}">{{ category.0.name }}</a>
-                                        {% if category.1 %}
-                                            <ul>
-                                                {% for subcategory in category.1 %}
-                                                    <li><a href="{{ subcategory.0.get_absolute_url }}">{{ subcategory.0.name }}</a></li>
-                                                {% endfor %}
-                                            </ul>
-                                        {% endif %}
-                                    </li>
-                                {% endfor %}
-                            </ul>
-                        </div>
-                    {% endif %}
-                {% endblock %}
+                {% category_tree depth=2 as tree_categories %}
+                {% if tree_categories %}
+                    <div class="side_categories" style="padding: 8px 0;">
+                        <ul class="nav nav-list">
+                            <li class="nav-header">{% trans "Browse categories" %}</li>
+                            {% for category in tree_categories %}
+                                <li>
+                                    <a href="{{ category.0.get_absolute_url }}">{{ category.0.name }}</a>
+                                    {% if category.1 %}
+                                        <ul>
+                                            {% for subcategory in category.1 %}
+                                                <li><a href="{{ subcategory.0.get_absolute_url }}">{{ subcategory.0.name }}</a></li>
+                                            {% endfor %}
+                                        </ul>
+                                    {% endif %}
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endif %}
             </aside>
-
             <div class="span9 catalog">
                 {% block header %}
                 <div class="page-header action">
@@ -76,12 +51,6 @@
                 {% endblock %}
 
                 {% include "partials/alert_messages.html" %}
-
-                <div id="promotions">
-                    {% for promotion in promotions_page %}
-                        {% render_promotion promotion %}
-                    {% endfor %}
-                </div>
 
                 {% block content %}
                 <div class="catalog">
