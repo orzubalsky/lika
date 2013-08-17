@@ -102,11 +102,17 @@ class PaymentDetailsView(views.PaymentDetailsView):
 
     def send_confirmation_message(self, order, **kwargs):
         code = self.communication_type_code
+        site = Site.objects.get_current()
 
-        download_link_url = reverse(
-            'customer:anon-order-download',
-            kwargs={'order_number': order.number,
-                    'hashcode': order.verification_hash()},
+        download_link_url = 'http://%s%s' % (
+            site.domain,
+            reverse(
+                'customer:anon-order-download',
+                kwargs={
+                    'order_number': order.number,
+                    'hashcode': order.verification_hash(),
+                },
+            )
         )
 
         ctx = {'order': order,
@@ -117,7 +123,6 @@ class PaymentDetailsView(views.PaymentDetailsView):
             path = reverse('customer:anon-order',
                            kwargs={'order_number': order.number,
                                    'hash': order.verification_hash()})
-            site = Site.objects.get_current()
             ctx['status_url'] = 'http://%s%s' % (site.domain, path)
 
         try:
