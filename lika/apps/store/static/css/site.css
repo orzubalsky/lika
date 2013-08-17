@@ -368,6 +368,14 @@ button.btn.btn-large, input.btn.btn-large[type="submit"] {
  
 }
 
+.dashboard button.btn.btn-large, .dashboard input.btn.btn-large[type="submit"]  {
+    font-size: 1.6em;
+}
+
+.dashboard .form-actions {
+	padding:10px;
+}
+
 .dashboard .btn {
 	font-size: 1.2em;	
 }
