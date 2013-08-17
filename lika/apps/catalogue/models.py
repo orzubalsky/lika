@@ -12,7 +12,7 @@ class Product(AbstractProduct):
 
 
     filename = FileField(upload_to='files', null=True, blank=True)
-    vimeo = TextField(verbose_name=u'vimeo embed code', blank=True, null=True)
+    vimeo_number = CharField(max_length=20, verbose_name=u'vimeo number', blank=True, null=True)
     difficulty_level = CharField(max_length=10, choices=DIFFICULTY_CHOICES, blank=True, null=True, default='beginner')
 
 

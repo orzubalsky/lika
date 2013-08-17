@@ -4,11 +4,18 @@
     {# use length rather then count as the images get queried anyways #}
 
     <div class="gallery">
-    {% for image in all_images %}
-     <div class="item">
-        <img src="{{ image.original.url }}" alt="image02" data-description="{% if image.caption %}{{ image.caption }}{% endif %}" />
-    </div>
-    {% endfor %}
+        {% if product.vimeo_number %}
+        <div class="item">
+            <iframe src="http://player.vimeo.com/video/{{ product.vimeo_number }}?title=0&amp;byline=0&amp;portrait=0" width="480" height="480" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe> 
+        </div>
+        {% endif %}
+
+        {% for image in all_images %}
+        <div class="item">
+           <img src="{{ image.original.url }}" alt="image02" data-description="{% if image.caption %}{{ image.caption }}{% endif %}" />
+        </div>
+        {% endfor %}
+        
         {% if all_images > 1 %}
         <div class="controls">
             <a class="back" href="">back</a>
