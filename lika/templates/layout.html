@@ -16,21 +16,7 @@
                 {% block mini_basket %}{% include "partials/mini_basket.html" %}{% endblock %}
             </div>
         </div>
-        {% category_tree depth=2 as categories %}
         {% block navigation %}
-            {% include "partials/nav_primary.html" %}
-        {% endblock %}
-    </header>
-
-    {# Main content of page - other layout templates may override this block #}
-    {% block content_wrapper %}
-	<div class="container-fluid page">
-        <div class="page_inner">
-
-            {% block breadcrumbs %}
-            {% endblock breadcrumbs %}
-
-            {% block column_left %}
              <div class="row-fluid">
                 <aside class="sidebar span3">
                     {% category_tree depth=2 as tree_categories %}
@@ -55,8 +41,19 @@
                     {% endif %}
                 </aside>
             </div>
-            {% endblock column_left %}
+        {% endblock %}
+    </header>
 
+    {# Main content of page - other layout templates may override this block #}
+    {% block content_wrapper %}
+	<div class="container-fluid page">
+        <div class="page_inner">
+
+            {% block breadcrumbs %}
+            {% endblock breadcrumbs %}
+
+            {% block column_left %}
+            {% endblock column_left %}
 
             {% block header %}
             <div class="page-header action">
