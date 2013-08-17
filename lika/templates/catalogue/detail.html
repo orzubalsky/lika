@@ -44,20 +44,8 @@
                 <a class="pull-right" href="{% url dashboard:catalogue-product product.id %}"><small><i class="icon-edit"></i> {% trans "Edit this product" %}</small></a>
             {% endif %}
             <h1>{{ product.get_title }}</h1>
-            
-            {% block product_stock_record %}
-            {% include "catalogue/partials/stock_record.html" %}
-            {% endblock %}
-             
-            {% block product_basket_form %}
-                {% include "catalogue/partials/add_to_basket_form.html" %}
-            {% endblock %}
-        </div><!-- /span6 -->
-        {% endblock %}
-
-    </div><!-- /row-fluid -->
-              
-    {% block product_description %}
+            <div class="level">Level:Beginner</div>
+              {% block product_description %}
         {% if product.description %}
         <div id="product_description" class="sub-header">
             <h2>{% trans "Product Description" %}</h2>
@@ -65,55 +53,47 @@
         <p>{{ product.description|safe }}</p>
         {% endif %}
     {% endblock %}
+            
+            {% block product_stock_record %}
+            {% include "catalogue/partials/stock_record.html" %}
+            {% endblock %}
+             
+            {% block product_basket_form %}
+            {% load basket_tags %}
+{% load i18n %}
+                {% if product.is_available_to_buy %}
+    {% basket_form request.basket product as basket_form %}
+    <form action="{% url basket:add %}" method="post" class="form-stacked">
+        {% csrf_token %}
+        {% include "partials/form_fields.html" with form=basket_form %}
+        <div class="form-actions">
+			<button type="submit" class="btn btn-large btn-primary btn-full" value="Add to basket">{% trans "Add this to my shopping bag+" %}</button>
+        </div>
+    </form>
+{% else %}
+	{% if has_active_alert %}
+	<p>{% trans "You have an active stock alert for this product." %}</p>
+	{% else %}
+	<form id="alert_form" method="post" action="{% url customer:alert-create product.id %}">
+        {% csrf_token %}
+		<p>{% trans "You can get an email alert when this product is back in stock." %}</p>
+        {% include "partials/form_fields.html" with form=alert_form %}
+        <button type="submit" class="btn btn-large btn-info btn-full">{% trans "Notify me" %}</button>
+    </form>
+	{% endif %}
+{% endif %}
+            {% endblock %}
+            <div id="view_more">View more like this &#8594;</div>
+        </div><!-- /span6 -->
+        {% endblock %}
+
+    </div><!-- /row-fluid -->
+              
+  
     
     {% block product_info %}
     {% endblock %}
 
-    {% block product_review %}
-    {% endblock product_review %}
-    
-    <div class="row-fluid">
-        {% if product.related_products.count %}
-        <div class="span6">
-            <div class="sub-header">
-                <h2>{% trans "Related items" %}</h2>
-            </div>
-            <div class="es-carousel-wrapper">
-                <div class="es-carousel">
-                    <ul>
-                        {% for product in product.related_products.all %}
-                        <li>
-                            {% render_product product %}
-                        </li>
-                        {% endfor %}
-                    </ul>
-                </div>
-            </div>
-        </div>
-        {% endif %}
-
-        {% if product.recommended_products.count %}
-        <div class="span6">
-            <div class="sub-header">
-                <h2>{% trans "Recommended items" %}</h2>
-            </div>
-            <div class="es-carousel-wrapper">
-                <div class="es-carousel">
-                    <ul>
-                        {% for product in product.recommended_products.all %}
-                        <li>
-                            {% render_product product %}
-                        </li>
-                        {% endfor %}
-                    </ul>
-                </div>
-            </div>
-        </div>
-        {% endif %}
-
-        {% recently_viewed_products %}
-
-    </div>
 </article><!-- End of product page -->
 {% endblock content %}
 
