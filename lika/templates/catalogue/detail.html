@@ -83,7 +83,7 @@
 	{% endif %}
 {% endif %}
             {% endblock %}
-            <div id="view_more"><a href="">View more like this &#8594;</a></div>
+            <div id="view_more"><a href="{% url catalogue:category product.categories.all.0.slug %}">View more like this &#8594;</a></div>
         </div><!-- /span6 -->
         {% endblock %}
 
