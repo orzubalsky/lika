@@ -23,9 +23,9 @@ USE_TZ = True
 
 PROJECT_DIR = os.path.dirname(__file__)
 
-sys.path.append(os.path.dirname(PROJECT_DIR))    
+sys.path.append(os.path.dirname(PROJECT_DIR))
 sys.path.append(PROJECT_DIR)
-sys.path.append(os.path.join(PROJECT_DIR, 'apps'))                      
+sys.path.append(os.path.join(PROJECT_DIR, 'apps'))
 
 
 # Absolute path to the directory static files should be collected to.
