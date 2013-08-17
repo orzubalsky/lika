@@ -128,9 +128,9 @@ h1, h2, h3, h4, h5, h6 {
 /*sidebar menu*/
 
 .row-fluid .span3.sidebar {
-	position:relative;
+	/*position:relative;
 	top:-144px;
-	left:299px;
+	left:299px;*/
 	z-index:100;
 	width: 85px;
 }
@@ -438,12 +438,16 @@ button.btn.btn-large, input.btn.btn-large[type="submit"] {
 .product_page h1 {
 	font-size: 1em;
 	display:inline;
-	}
+}
 	
 .product_page .level {
 	font-weight:normal;
 	color:blue;
 	text-transform:uppercase;
 	display:inline;
-	font-family: TradeGothicLT,"Droid Sans",Helvetica,Arial;
+
+}
+
+.product_page #product_description {
+	display:none;
 }
