@@ -46,6 +46,22 @@ h1, h2, h3, h4, h5, h6 {
 	display: none;	
 }
 
+.navbar-inner {
+	background:none;
+	border:none;
+	padding:0;
+}
+
+.navbar .nav.pull-right {
+    color: blue;
+    font-family: TradeGothicLTStdBold, "Droid Sans", Helvetica, Arial;
+    margin-right: -15px;
+    position: relative;
+    text-transform: uppercase;
+    top:-5px;
+    padding:0;
+}
+
 #language_selector {
 	display: none;
 }
@@ -73,14 +89,15 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .breadcrumb {
-	background-color:white;
+	/*background-color:white;
 	padding:0;
 	font-family: TradeGothicLTStdBold, "Droid Sans", Helvetica, Arial;
 	text-transform: uppercase;
 	font-weight: normal;
 	color:black;
 	letter-spacing:.05em;
-	font-size: 1.2em;
+	font-size: 1.2em;*/
+	display:none;
 }
 
 .cart li {
@@ -112,10 +129,14 @@ h1, h2, h3, h4, h5, h6 {
 
 .row-fluid .span3.sidebar {
 	position:relative;
-	top:-180px;
-	left:314px;
+	top:-144px;
+	left:299px;
 	z-index:100;
-	width: 100px;
+	width: 85px;
+}
+
+.account-profile .row-fluid .span3.sidebar {
+	top:-144px;
 }
 
 .side_categories .nav .nav-header {
@@ -134,12 +155,13 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .side_categories .nav-list > li > a {
-	padding:0;
+	padding:0 0 0 15px;
 	font-family: TradeGothicLTStdBold, "Droid Sans", Helvetica, Arial;
 	text-transform: uppercase;
 	font-weight: normal;
 	color:black;
 	letter-spacing:.05em;
+	border-radius: 2px;
 }
 
 
@@ -151,13 +173,22 @@ h1, h2, h3, h4, h5, h6 {
 
 .page-header {
 	border-bottom:0;
-	display:none;
+}
+
+.catalog .page-header {
+	/*margin:0;*/
 }
 
 /*********/
-.row-fluid .span9.catalog  {
+.row-fluid .span9.catalog {
 	width:100%;
 	margin:0;
+	position:relative;
+	top:-100px;
+}
+
+.row-fluid .span9.catalog .page-header {
+	margin-bottom:10px;
 }
 
 /*catalogue items*/
@@ -185,8 +216,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .product_pod {
-	height:200px;
-	margin-right:20px;
+	height:240px;
+	margin-right:40px;
 }
 
 .product_pod h3 {
@@ -201,6 +232,21 @@ h1, h2, h3, h4, h5, h6 {
 
 .product_pod h3 a:hover {
 }
+
+.product_pod .image_container img {
+	max-height: 198px;
+	height: 198px;
+	width: 198px;
+}
+
+.product_pod .thumbnail {
+    border: 1px dashed white;
+    padding: 0;
+}
+
+.product_pod a:hover .thumbnail {
+ 	box-shadow: none;
+ }
 
 .product_pod .product_price .price_color {
 	display:none;
@@ -373,6 +419,13 @@ button.btn.btn-large, input.btn.btn-large[type="submit"] {
     width: 300px;
 }
 
+
+/*account profile*/
+
+.account-profile #content_inner {
+	/*position:relative;
+	top:-100px;*/
+}
 
 /*checkout*/
 
