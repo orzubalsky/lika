@@ -402,9 +402,9 @@ button.btn.btn-large, input.btn.btn-large[type="submit"] {
 
 .home .dashboard .span4 table caption, .home .dashboard .span6 table caption{
 	text-transform: uppercase;
-	font-size: 1.1em;
+	font-size: 1em;
 	font-family: TradeGothicLT,"Droid Sans",Helvetica,Arial;
-	letter-spacing: 0.05em;
+	letter-spacing: 0em;
 	height:25px;
 	margin-top:10px;
 }
@@ -465,6 +465,7 @@ button.btn.btn-large, input.btn.btn-large[type="submit"] {
 .product_page p {
 	min-height: 290px;
 	line-height:1.4em;
+	font-size:.95em;
 }
 
 .product_page .control-group .control-label, .product_page .control-group .controls {
@@ -501,3 +502,4 @@ button.btn.btn-large, input.btn.btn-large[type="submit"] {
 .product_page .gallery .item {
 	height: 480px;
 }
+
