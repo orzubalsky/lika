@@ -62,6 +62,9 @@ class CustomerApplication(app.CustomerApplication):
             url(r'^orders/(?P<order_number>[\w-]*)/download/(?P<hashcode>\w+)$',
                 'customer.views.anonymous_order_download_view', name='anon-order-download'),
 
+            url(r'^orders/(?P<order_number>[\w-]*)/download/(?P<hashcode>\w+)/(?P<product_pk>\d+)$',
+                'customer.views.download_file', name='download-file'),
+
             url(r'^orders/(?P<order_number>[\w-]*)/$',
                 login_required(self.order_detail_view.as_view()),
                 name='order'),

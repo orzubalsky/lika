@@ -23,7 +23,7 @@
         <td><a href="{{ line.product.get_absolute_url }}">{{ line.description }}</a></td>
         <td>{{ line.line_price_before_discounts_excl_tax|currency }}</td>
         <td>{{ line.line_price_before_discounts_incl_tax|currency }}</td>
-        <td><a href="{{ MEDIA_URL }}{{ line.product.filename }}">download</a></td>
+        <td><a href="{% url customer:download-file order_number=order.number hashcode=hashcode product_pk=line.product.pk %}">download</a></td>
     </tr>
     {% endfor %}
     {% for discount in order.discounts.all %}

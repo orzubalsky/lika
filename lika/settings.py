@@ -200,6 +200,8 @@ OSCAR_ORDER_STATUS_PIPELINE = {
     'Cancelled': (),
 }
 
+SENDFILE_BACKEND = 'sendfile.backends.development'
+
 try:
     LOCAL_SETTINGS
 except NameError:

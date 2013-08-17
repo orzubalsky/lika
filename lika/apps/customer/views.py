@@ -1,7 +1,16 @@
 import urlparse
+import posixpath
+import urllib
+import os
+import urlparse
+from sendfile import sendfile
+from django.core.urlresolvers import resolve
+from django.conf import settings
+from django.views.static import serve
+from django.http import HttpResponse
+from django.utils.encoding import smart_str
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
-
 from django.views.generic import (TemplateView, ListView, DetailView,
                                   CreateView, UpdateView, DeleteView,
                                   FormView, RedirectView)
@@ -594,10 +603,6 @@ def anonymous_order_download_view(request, order_number=None, hashcode=None):
     else:
         form = EmailForm()
 
-
-    print order.guest_email
-    print order.user
-
     return render_to_response('customer/anon_order_download.html',{ 
             'emails_match' : emails_match,
             'form'         : form,
@@ -605,6 +610,36 @@ def anonymous_order_download_view(request, order_number=None, hashcode=None):
             'hashcode'     : hashcode, 
         }, context_instance=RequestContext(request))
 
+
+def download_file(request, order_number=None, hashcode=None, product_pk=None):
+    ""
+    product = get_object_or_404(Product, pk=product_pk)
+    order = get_object_or_404(Order, number=order_number)
+
+    if hashcode != order.verification_hash():
+        raise Http404()
+
+    try:
+        referer = request.META['HTTP_REFERER']
+
+        path = urlparse.urlparse(referer).path
+        match = resolve(path)
+
+        match_hashcode = match.kwargs.get('hashcode')
+        match_order_number = match.kwargs.get('order_number')
+
+        order = get_object_or_404(Order, number=match_order_number)
+
+        if match_hashcode != order.verification_hash():
+            raise Http404()
+
+        if match_hashcode != hashcode or match_order_number != order_number:
+            raise Http404()
+
+        return sendfile(request, product.filename.path, attachment=True)
+
+    except KeyError:
+        raise Http404()
 
 
 class ChangePasswordView(FormView):
