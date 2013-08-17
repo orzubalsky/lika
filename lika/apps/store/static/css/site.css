@@ -242,8 +242,8 @@ h1, h2, h3, h4, h5, h6 {
 
 
 .product_pod .image_container img {
-	max-height:200px;
-	max-width:200px;
+	max-height:100%;
+	max-width:100%;
 }
 
 .product_pod .thumbnail {
@@ -253,6 +253,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .product_pod a:hover .thumbnail {
  	box-shadow: none;
+ 	opacity:.9;
  }
 
 .product_pod .product_price .price_color {
