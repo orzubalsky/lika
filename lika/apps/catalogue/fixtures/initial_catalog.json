@@ -4353,6 +4353,48 @@
     }, 
     {
         "pk": 1, 
+        "model": "catalogue.category", 
+        "fields": {
+            "description": "", 
+            "numchild": 0, 
+            "slug": "patterns", 
+            "depth": 1, 
+            "full_name": "Patterns", 
+            "path": "0001", 
+            "image": "", 
+            "name": "Patterns"
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "catalogue.category", 
+        "fields": {
+            "description": "", 
+            "numchild": 0, 
+            "slug": "collections", 
+            "depth": 1, 
+            "full_name": "Collections", 
+            "path": "0002", 
+            "image": "", 
+            "name": "Collections"
+        }
+    }, 
+    {
+        "pk": 3, 
+        "model": "catalogue.category", 
+        "fields": {
+            "description": "", 
+            "numchild": 0, 
+            "slug": "archive", 
+            "depth": 1, 
+            "full_name": "Archive", 
+            "path": "0003", 
+            "image": "", 
+            "name": "Archive"
+        }
+    }, 
+    {
+        "pk": 1, 
         "model": "catalogue.productclass", 
         "fields": {
             "track_stock": false, 
@@ -4371,6 +4413,48 @@
             "requires_shipping": true, 
             "name": "Physical Product", 
             "slug": "physical-product"
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "catalogue.category", 
+        "fields": {
+            "description": "", 
+            "numchild": 0, 
+            "slug": "patterns", 
+            "depth": 1, 
+            "full_name": "Patterns", 
+            "path": "0001", 
+            "image": "", 
+            "name": "Patterns"
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "catalogue.category", 
+        "fields": {
+            "description": "", 
+            "numchild": 0, 
+            "slug": "collections", 
+            "depth": 1, 
+            "full_name": "Collections", 
+            "path": "0002", 
+            "image": "", 
+            "name": "Collections"
+        }
+    }, 
+    {
+        "pk": 3, 
+        "model": "catalogue.category", 
+        "fields": {
+            "description": "", 
+            "numchild": 0, 
+            "slug": "archive", 
+            "depth": 1, 
+            "full_name": "Archive", 
+            "path": "0003", 
+            "image": "", 
+            "name": "Archive"
         }
     }, 
     {
@@ -7098,6 +7182,45 @@
             "password": "pbkdf2_sha256$10000$LOSPhmgFclAi$QBCG85KCVWIvgjGDQZvIjIqKyEufU6Lw1R9k9UlS1AA=", 
             "email": "youngestforever@gmail.com", 
             "date_joined": "2013-08-17T23:10:48Z"
+        }
+    }, 
+    {
+        "pk": 6, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 1, 
+            "action_time": "2013-08-17T23:21:42Z", 
+            "object_repr": "Archive", 
+            "object_id": "3", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 26
+        }
+    }, 
+    {
+        "pk": 5, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 1, 
+            "action_time": "2013-08-17T23:21:36Z", 
+            "object_repr": "Collections", 
+            "object_id": "2", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 26
+        }
+    }, 
+    {
+        "pk": 4, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 1, 
+            "action_time": "2013-08-17T23:20:45Z", 
+            "object_repr": "Patterns", 
+            "object_id": "1", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 26
         }
     }, 
     {
