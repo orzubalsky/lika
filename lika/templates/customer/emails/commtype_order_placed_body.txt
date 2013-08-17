@@ -8,7 +8,7 @@ will be processed shortly.{% endblocktrans %}
 {% for line in order.lines.all %}
  * {{ line.title }} - {%  trans 'quantity:' %} {{ line.quantity }} - {% trans 'price:' %} {{ line.line_price_incl_tax|currency }}
  	{% if line.product.product_class.name == 'Digital Product' %}
- 		- {% trans 'download at:' %} {{ line.product.filename }}
+ 		- {% trans 'download at:' %} {{ download_link_url }}
  	{% endif %}
 {% endfor %}
 

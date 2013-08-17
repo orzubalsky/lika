@@ -1,0 +1,29 @@
+.gallery, .description {
+    float: left;
+}
+.project .content .gallery {
+    margin-right: 35px;
+    width: 480px;  
+    height: 270px;  
+}
+.gallery {
+    position: relative;
+}
+.gallery .item {
+    display: none;
+    position: relative;
+    overflow: hidden;
+    height: 270px;
+    width: 480px;
+}
+.gallery .item img {
+    width: 100%;
+    position: absolute;
+}
+.gallery .controls {
+    position: absolute;
+    right: 0;
+}
+.gallery .controls a {
+    border-bottom: none;
+}

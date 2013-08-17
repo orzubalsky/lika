@@ -569,10 +569,12 @@ class AnonymousOrderDetailView(DetailView):
         return order
 
 
-def anonymous_order_download_view(request, order_number=None, line_id=None):
+def anonymous_order_download_view(request, order_number=None, hashcode=None):
 
     order = get_object_or_404(Order, number=order_number)
-    line = get_object_or_404(Line, pk=line_id)
+
+    if hashcode != order.verification_hash():
+        raise Http404()
 
     emails_match = False
     
@@ -599,8 +601,8 @@ def anonymous_order_download_view(request, order_number=None, line_id=None):
     return render_to_response('customer/anon_order_download.html',{ 
             'emails_match' : emails_match,
             'form'         : form,
-            'line'         : line,
-            'order'        : order, 
+            'order'        : order,
+            'hashcode'     : hashcode, 
         }, context_instance=RequestContext(request))
 
 

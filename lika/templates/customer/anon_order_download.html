@@ -17,7 +17,6 @@
         <th>{% trans 'Line price excl. tax' %} tax</th>
         <th>{% trans 'Line price incl. tax' %}</th>
         <th>{% trans 'Download Link' %}</th>
-        <th></th>
     </tr>
     {% for line in order.lines.all %}
     <tr>
@@ -25,9 +24,6 @@
         <td>{{ line.line_price_before_discounts_excl_tax|currency }}</td>
         <td>{{ line.line_price_before_discounts_incl_tax|currency }}</td>
         <td><a href="{{ MEDIA_URL }}{{ line.product.filename }}">download</a></td>
-        <td>
-            <a href="{% url catalogue:reviews-add line.product.slug line.product.id %}">{% trans 'Write a review' %}</a>
-        </td>
     </tr>
     {% endfor %}
     {% for discount in order.discounts.all %}
@@ -40,7 +36,7 @@
 
 {% else %}
 
-<form id="authenticateEmail" method="post" action="{% url customer:anon-order-download order_number=order.number line_id=line.pk %}">{% csrf_token %}
+<form id="authenticateEmail" method="post" action="{% url customer:anon-order-download order_number=order.number hashcode=hashcode %}">{% csrf_token %}
 
     {{ form.as_p }}
     <input type="submit" class="submit" value="Sumbit" />
