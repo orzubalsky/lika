@@ -74,77 +74,6 @@
     }, 
     {
         "pk": 1, 
-        "model": "catalogue.productattribute", 
-        "fields": {
-            "code": "difficulty", 
-            "product_class": 1, 
-            "entity_type": null, 
-            "option_group": 1, 
-            "required": false, 
-            "type": "text", 
-            "name": "Difficulty"
-        }
-    }, 
-    {
-        "pk": 1, 
-        "model": "catalogue.productattributevalue", 
-        "fields": {
-            "value_date": null, 
-            "value_integer": null, 
-            "product": 1, 
-            "value_float": null, 
-            "value_text": "2", 
-            "attribute": 1, 
-            "value_richtext": null, 
-            "value_entity": null, 
-            "value_option": null, 
-            "value_boolean": false
-        }
-    }, 
-    {
-        "pk": 1, 
-        "model": "catalogue.attributeoptiongroup", 
-        "fields": {
-            "name": "Difficulty Level"
-        }
-    }, 
-    {
-        "pk": 1, 
-        "model": "catalogue.attributeoption", 
-        "fields": {
-            "group": 1, 
-            "option": "1"
-        }
-    }, 
-    {
-        "pk": 2, 
-        "model": "catalogue.attributeoption", 
-        "fields": {
-            "group": 1, 
-            "option": "2"
-        }
-    }, 
-    {
-        "pk": 3, 
-        "model": "catalogue.attributeoption", 
-        "fields": {
-            "group": 1, 
-            "option": "3"
-        }
-    }, 
-    {
-        "pk": 1, 
-        "model": "catalogue.productimage", 
-        "fields": {
-            "caption": "", 
-            "product": 1, 
-            "display_order": 0, 
-            "original": "images/products/2013/08/lika2_1.png", 
-            "date_created": "2013-08-06T21:09:01Z"
-        }
-    }, 
-    {
-        "pk": 1, 
         "model": "partner.partner", 
         "fields": {
             "code": "default", 
@@ -154,22 +83,4 @@
             ]
         }
     }, 
-    {
-        "pk": 1, 
-        "model": "partner.stockrecord", 
-        "fields": {
-            "price_currency": "USD", 
-            "product": 1, 
-            "partner_sku": "1", 
-            "price_retail": "15.00", 
-            "date_updated": "2013-08-06T21:10:07Z", 
-            "num_in_stock": null, 
-            "num_allocated": 0, 
-            "low_stock_threshold": null, 
-            "date_created": "2013-08-06T21:10:07Z", 
-            "partner": 1, 
-            "price_excl_tax": "10.00", 
-            "cost_price": "0.00"
-        }
-    }
 ]

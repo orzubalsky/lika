@@ -44,7 +44,9 @@
                 <a class="pull-right" href="{% url dashboard:catalogue-product product.id %}"><small><i class="icon-edit"></i> {% trans "Edit this product" %}</small></a>
             {% endif %}
             <h1>{{ product.get_title }}</h1>
-            <div class="level">Level:Beginner</div>
+            {% if product.difficulty_level %}
+            <div class="level">Level:{{ product.difficulty_level }}</div>                
+            {% endif %}
               {% block product_description %}
         {% if product.description %}
         <div id="product_description" class="sub-header">
