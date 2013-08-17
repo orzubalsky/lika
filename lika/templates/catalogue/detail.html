@@ -44,6 +44,15 @@
                 <a class="pull-right" href="{% url dashboard:catalogue-product product.id %}"><small><i class="icon-edit"></i> {% trans "Edit this product" %}</small></a>
             {% endif %}
             <h1>{{ product.get_title }}</h1>
+            <div class="level">Level: Beginner</div>
+              {% block product_description %}
+        {% if product.description %}
+        <div id="product_description" class="sub-header">
+            <h2>{% trans "Product Description" %}</h2>
+        </div>
+        <p>{{ product.description|safe }}</p>
+        {% endif %}
+    {% endblock %}
             
             {% block product_stock_record %}
             {% include "catalogue/partials/stock_record.html" %}
@@ -57,14 +66,7 @@
 
     </div><!-- /row-fluid -->
               
-    {% block product_description %}
-        {% if product.description %}
-        <div id="product_description" class="sub-header">
-            <h2>{% trans "Product Description" %}</h2>
-        </div>
-        <p>{{ product.description|safe }}</p>
-        {% endif %}
-    {% endblock %}
+  
     
     {% block product_info %}
     {% endblock %}

@@ -433,3 +433,17 @@ button.btn.btn-large, input.btn.btn-large[type="submit"] {
 	font-size: 1.4em;
 }
 
+/*product_page*/
+
+.product_page h1 {
+	font-size: 1em;
+	display:inline;
+	}
+	
+.product_page .level {
+	font-weight:normal;
+	color:blue;
+	text-transform:uppercase;
+	display:inline;
+	font-family: TradeGothicLT,"Droid Sans",Helvetica,Arial;
+}
