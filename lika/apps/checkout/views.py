@@ -1,3 +1,5 @@
+import logging
+from django.contrib.sites.models import Site
 from django.contrib import messages
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
@@ -5,6 +7,14 @@ from oscar.apps.checkout import views
 from oscar.apps.payment import forms, exceptions, models
 from shipping.repository import Repository
 from paypal.payflow import facade
+from oscar.core.loading import get_class
+from django.db.models import get_model
+
+Dispatcher = get_class('customer.utils', 'Dispatcher')
+CommunicationEvent = get_model('order', 'CommunicationEvent')
+CommunicationEventType = get_model('customer', 'CommunicationEventType')
+
+logger = logging.getLogger('oscar.checkout')
 
 
 class PaymentDetailsView(views.PaymentDetailsView):
@@ -61,7 +71,6 @@ class PaymentDetailsView(views.PaymentDetailsView):
             return HttpResponseRedirect(reverse('checkout:payment-details'))
         bankcard = bankcard_form.get_bankcard_obj()
 
-        print request
         # Attempt to submit the order, passing the bankcard object so that it
         # gets passed back to the 'handle_payment' method below.
         return self.submit(
@@ -90,6 +99,51 @@ class PaymentDetailsView(views.PaymentDetailsView):
                                amount_allocated=total_incl_tax)
         self.add_payment_source(source)
         self.add_payment_event('Authorised', total_incl_tax)
+
+    def send_confirmation_message(self, order, **kwargs):
+        code = self.communication_type_code
+
+        download_link_url = reverse(
+            'customer:anon-order-download',
+            kwargs={'order_number': order.number,
+                    'hashcode': order.verification_hash()},
+        )
+
+        ctx = {'order': order,
+               'lines': order.lines.all(),
+               'download_link_url': download_link_url}
+
+        if not self.request.user.is_authenticated():
+            path = reverse('customer:anon-order',
+                           kwargs={'order_number': order.number,
+                                   'hash': order.verification_hash()})
+            site = Site.objects.get_current()
+            ctx['status_url'] = 'http://%s%s' % (site.domain, path)
+
+        try:
+            event_type = CommunicationEventType.objects.get(code=code)
+        except CommunicationEventType.DoesNotExist:
+            # No event-type in database, attempt to find templates for this
+            # type and render them immediately to get the messages.  Since we
+            # have not CommunicationEventType to link to, we can't create a
+            # CommunicationEvent instance.
+            messages = CommunicationEventType.objects.get_and_render(code, ctx)
+            event_type = None
+        else:
+            # Create CommunicationEvent
+            CommunicationEvent._default_manager.create(
+                order=order, event_type=event_type)
+            messages = event_type.get_messages(ctx)
+
+        if messages and messages['body']:
+            logger.info("Order #%s - sending %s messages", order.number, code)
+            dispatcher = Dispatcher(logger)
+            dispatcher.dispatch_order_messages(order, messages,
+                                               event_type, **kwargs)
+        else:
+            logger.warning("Order #%s - no %s communication event type",
+                           order.number, code)
+
 
 
 class ShippingMethodView(views.ShippingMethodView):
